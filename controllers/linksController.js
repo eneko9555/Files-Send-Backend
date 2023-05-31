@@ -18,10 +18,12 @@ const newLink = async (req, res) => {
     if (req.user) {
         const {password, downloads} = req.body
 
-        if (downloads) {
+        if (downloads > 1) {
             link.downloads = downloads
+        } else {
+            link.downloads = 1
         }
-        if (password) {
+        if (password !== "") {
             const salt = await bcrypt.genSalt(10)
             link.password = await bcrypt.hash(password, salt)
         }
@@ -46,7 +48,7 @@ const getLink = async (req, res) => {
         return res.status(404).json({msg : "El enlace no existe o ha superado el limite de descargas"})
     }
 
-    res.json({ file : link.name , downloads : link.downloads, password: link.password })
+    res.json({ file : link.name , downloads : link.downloads, password: link.password || null })
   
 }
 
