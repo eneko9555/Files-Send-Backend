@@ -4,9 +4,6 @@
   "version": "1.0.0",
   "description": "backend de send-files",
   "main": "index.js",
-  "engines": {
-    "node": ">=14.20.1"
-  },
   "scripts": {
     "dev": "nodemon ./index.js",
     "start": "node ./index.js"
